@@ -3,7 +3,7 @@ repo_url: https://github.com/CB-X2-Jun/codeforces-problems-cn-translations
 site_author: CB_X2_Jun
 site_description: CodeForces 题目的中文翻译站
 site_url: https://cf.etoj.run.place
-copyright: © 2025 CB_X2_Jun & 题目翻译者们
+copyright: © 2026 CB_X2_Jun & 题目翻译者们
 remote_branch: main
 plugins:
   - i18n:
@@ -107,4 +107,5 @@ extra:
       name: Email
     - icon: material/github
       link: https://github.com/CB-X2-Jun
+
       name: Site Owner's GitHub Account
