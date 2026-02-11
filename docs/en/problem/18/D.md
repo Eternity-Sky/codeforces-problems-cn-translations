@@ -9,7 +9,7 @@ Bob never kept more than one memory stick, as he feared to mix up their capaciti
 
 ## Input
 
-The first input line contains number $ n $ ( $ 1\le n\le 5000 $ ) — amount of Bob's working days. The following $ n $ lines contain the description of the days. Line sell x stands for a day when a customer came to Bob to buy a $ 2^{x} $ MB memory stick ( $ 0 \le x\le 2000 $ ). It's guaranteed that for each $ x $ there is not more than one line sell x. Line win x stands for a day when Bob won a $ 2^{x} $ MB memory stick ( $ 0 \le x \le 2000 $ ).
+The first input line contains number $ n $ ( $ 1\le n\le 5000 $ ) — amount of Bob's working days. The following $ n $ lines contain the description of the days. Line `sell x` stands for a day when a customer came to Bob to buy a $ 2^{x} $ MB memory stick ( $ 0 \le x\le 2000 $ ). It's guaranteed that for each $ x $ there is not more than one line `sell x`. Line `win x` stands for a day when Bob won a $ 2^{x} $ MB memory stick ( $ 0 \le x \le 2000 $ ).
 
 ## Output
 
@@ -30,13 +30,13 @@ win 10
 sell 10
 ```
 
-### Output 1
+### Output 2
 
 ```
 1056
 ```
 
-### Input 2
+### Input 1
 
 ```
 3
