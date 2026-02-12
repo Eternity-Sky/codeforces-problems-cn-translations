@@ -53,6 +53,8 @@ theme:
     - search.suggest
     - search.share
     - navigation.footer
+    - navigation.instant
+    - navigation.instant.progress
   palette:
     # Palette toggle for automatic mode
     - media: "(prefers-color-scheme)"
@@ -109,3 +111,4 @@ extra:
       link: https://github.com/CB-X2-Jun
 
       name: Site Owner's GitHub Account
+
