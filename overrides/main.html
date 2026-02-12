@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block content %}
+  {{ super() }}
+
+  <hr>
+
+  {% if page.meta.author %}
+    <div class="page-authors">
+      本页作者：
+      {% set authors = page.meta.author.split(',') %}
+      {% for author in authors %}
+        <a href="https://github.com/{{ author.strip() }}" target="_blank">
+          {{ author.strip() }}
+        </a>{% if not loop.last %}, {% endif %}
+      {% endfor %}
+    </div>
+  {% endif %}
+
+  <div class="page-license">
+    若未特别说明，本站使用 MIT 与 SATA。
+  </div>
+
+{% endblock %}
