@@ -22,7 +22,7 @@
   </div>
 
   <div id="gitalk-container"></div>
-  <!-- <script src="https://giscus.app/client.js"
+  <script src="https://giscus.app/client.js"
         data-repo="CB-X2-Jun/codeforces-problems-cn-translations"
         data-repo-id="R_kgDORNrtjg"
         data-category="Announcements"
@@ -32,12 +32,56 @@
         data-reactions-enabled="1"
         data-emit-metadata="0"
         data-input-position="top"
-        data-theme="preferred_color_scheme"
+        data-theme="light_tritanopia"
         data-lang="zh-CN"
         crossorigin="anonymous"
         async>
-</script> -->
-      <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+</script>
+
+<script>
+  function getGiscusTheme() {
+    const meta = document.querySelector('meta[name="color-scheme"]');
+    if (!meta) return "light_tritanopia";
+
+    return meta.getAttribute("content") === "dark"
+      ? "dark_dimmed"
+      : "light_tritanopia";
+  }
+
+  function syncGiscusTheme() {
+    const iframe = document.querySelector("iframe.giscus-frame");
+    if (!iframe) return;
+
+    iframe.contentWindow.postMessage(
+      {
+        giscus: {
+          setConfig: {
+            theme: getGiscusTheme()
+          }
+        }
+      },
+      "https://giscus.app"
+    );
+  }
+
+  // 页面加载后同步一次
+  window.addEventListener("load", () => {
+    setTimeout(syncGiscusTheme, 300);
+  });
+
+  // 监听 <meta name="color-scheme"> 变化
+  const meta = document.querySelector('meta[name="color-scheme"]');
+  if (meta) {
+    const observer = new MutationObserver(syncGiscusTheme);
+    observer.observe(meta, {
+      attributes: true,
+      attributeFilter: ["content"]
+    });
+  }
+</script>
+
+
+      <!-- <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
       <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
       <script>
         var gitalk = new Gitalk({
@@ -54,6 +98,6 @@
 })
 
 gitalk.render('gitalk-container')
-      </script>
+      </script> -->
 
 {% endblock %}
