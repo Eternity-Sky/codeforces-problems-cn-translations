@@ -2,9 +2,10 @@
 
 ## 1
 
-|A [1000]|B [1600]|
-|:-:|:-:|
-|[Theatre Square](/en/problem/1/A) (math)|[Spreadsheets](/en/problem/1/B) (implementation, math)|
+|A [1000]|B [1600]|C [2100]|
+|:-:|:-:|:-:|
+|[Theatre Square](/en/problem/1/A) (math)|[Spreadsheets](/en/problem/1/B) (implementation, math)|[Ancient Berland Circus](/en/problem/1/C) (geometry, math)|
+
 
 
 ## 18

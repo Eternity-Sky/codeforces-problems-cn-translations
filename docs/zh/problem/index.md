@@ -14,9 +14,10 @@
 
 ## 1
 
-|A [1000]|B [1600]|
-|:-:|:-:|
-|[Theatre Square \| 剧院广场](/problem/1/A)（数学）|[Spreadsheets \| 电子表格](/problem/1/B)（实现，数学）|
+|A [1000]|B [1600]|C [2100]|
+|:-:|:-:|:-:|
+|[Theatre Square \| 剧院广场](/problem/1/A)（数学）|[Spreadsheets \| 电子表格](/problem/1/B)（实现，数学）|[Ancient Berland Circus \| 古老的伯兰马戏团](/problem/1/C)（几何，数学）|
+
 
 
 ## 18
