@@ -1,0 +1,56 @@
+name: 自动翻译题目
+
+on:
+  workflow_dispatch:
+    inputs:
+      contest_id:
+        description: '比赛 ID（留空则使用 config 中的列表）'
+        required: false
+      problem_index:
+        description: '题号，如 A（留空则使用 config）'
+        required: false
+  schedule:
+    # 每周一凌晨 2 点 (UTC) 运行，翻译 config 中的题目
+    - cron: '0 2 * * 1'
+  push:
+    paths:
+      - '.github/translate-problems.json'
+
+jobs:
+  translate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run translate
+        run: |
+          if [ -n "${{ github.event.inputs.contest_id }}" ] && [ -n "${{ github.event.inputs.problem_index }}" ]; then
+            python scripts/translate.py "${{ github.event.inputs.contest_id }}" "${{ github.event.inputs.problem_index }}"
+          else
+            python scripts/translate.py --config .github/translate-problems.json
+          fi
+        continue-on-error: true
+
+      - name: Commit and push
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add docs/
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "chore: 自动翻译题目 [skip ci]"
+            git push
+          fi

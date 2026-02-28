@@ -77,3 +77,24 @@ author: 之前填在这的用户名(可能有多个),你的GitHub用户名
 感谢耐心看完 ^_^。
 
 希望这个项目不要半途而废……
+
+## 自动翻译
+
+项目内置了 GitHub Action，可使用**免费翻译 API**（无需 Key）自动翻译题目并存入 `docs/zh/problem`：
+
+- **LibreTranslate** 社区实例 `translate.cutie.dating`（免 Key）
+- **MyMemory** `api.mymemory.translated.net`（免 Key，每日约 5000 字符）
+
+### 使用方式
+
+1. **手动触发**：在 GitHub → Actions → 「自动翻译题目」→ Run workflow，可填写比赛 ID 和题号，或留空使用配置文件
+2. **配置文件**：编辑 `.github/translate-problems.json`，添加待翻译题目，格式：`[{"contest": 1, "problem": "A"}, ...]`
+3. **定时任务**：每周一 2:00 UTC 会自动运行配置中的题目
+
+```bash
+# 本地运行单题
+python scripts/translate.py 1 A
+
+# 使用配置文件
+python scripts/translate.py --config .github/translate-problems.json
+```

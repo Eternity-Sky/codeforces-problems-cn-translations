@@ -2,9 +2,10 @@
 
 ## 1
 
-|A [1000]|
-|:-:|
-|[Theatre Square](/en/problem/1/A) (math)|
+|A [1000]|B [1600]|
+|:-:|:-:|
+|[Theatre Square](/en/problem/1/A) (math)|[Spreadsheets](/en/problem/1/B) (implementation, math)|
+
 
 ## 18
 
