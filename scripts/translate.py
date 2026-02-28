@@ -389,8 +389,8 @@ def run_translate(contest_id: int, problem_index: str, repo_root: Path, author: 
 
 def main():
     parser = argparse.ArgumentParser(description="Codeforces 题目自动翻译")
-    parser.add_argument("contest_id", type=int, help="比赛 ID")
-    parser.add_argument("problem_index", type=str, help="题号，如 A")
+    parser.add_argument("contest_id", type=int, nargs="?", help="比赛 ID（使用 --config 时可选）")
+    parser.add_argument("problem_index", type=str, nargs="?", help="题号，如 A（使用 --config 时可选）")
     parser.add_argument("--repo-root", type=Path, default=Path(__file__).resolve().parent.parent)
     parser.add_argument("--author", default="github-actions")
     parser.add_argument("--config", type=Path, help="从 JSON 配置文件读取题目列表，格式: [{\"contest\":1,\"problem\":\"A\"},...]")
@@ -404,8 +404,10 @@ def main():
             if cid and pid:
                 run_translate(int(cid), str(pid), repo_root, args.author)
                 time.sleep(2)
-    else:
+    elif args.contest_id is not None and args.problem_index:
         run_translate(args.contest_id, args.problem_index, repo_root, args.author)
+    else:
+        parser.error("请提供 contest_id 和 problem_index，或使用 --config 指定配置文件")
 
 
 if __name__ == "__main__":
