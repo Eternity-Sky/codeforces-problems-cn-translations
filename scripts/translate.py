@@ -360,9 +360,13 @@ def update_index(contest_id: int, problem_index: str, en_title: str, zh_title: s
         en_idx.write_text(en_content, encoding="utf-8")
 
 
-def run_translate(contest_id: int, problem_index: str, repo_root: Path, author: str = "github-actions"):
+def run_translate(contest_id: int, problem_index: str, repo_root: Path, author: str = "Eternity-Sky", force: bool = False):
     """执行单题翻译并保存"""
     problem_index = problem_index.upper()
+    zh_file = repo_root / "docs" / "zh" / "problem" / str(contest_id) / f"{problem_index}.md"
+    if zh_file.exists() and not force:
+        print(f"跳过 CF{contest_id}{problem_index}（已存在，使用 --force 强制覆盖）")
+        return True
     print(f"正在处理 CF{contest_id}{problem_index}...")
     problem = fetch_problem(contest_id, problem_index)
     if not problem:
@@ -392,8 +396,9 @@ def main():
     parser.add_argument("contest_id", type=int, nargs="?", help="比赛 ID（使用 --config 时可选）")
     parser.add_argument("problem_index", type=str, nargs="?", help="题号，如 A（使用 --config 时可选）")
     parser.add_argument("--repo-root", type=Path, default=Path(__file__).resolve().parent.parent)
-    parser.add_argument("--author", default="github-actions")
+    parser.add_argument("--author", default="Eternity-Sky")
     parser.add_argument("--config", type=Path, help="从 JSON 配置文件读取题目列表，格式: [{\"contest\":1,\"problem\":\"A\"},...]")
+    parser.add_argument("--force", action="store_true", help="强制覆盖已存在的翻译")
     args = parser.parse_args()
     repo_root = args.repo_root
     if args.config and args.config.exists():
@@ -402,10 +407,10 @@ def main():
             cid = item.get("contest") or item.get("contestId")
             pid = item.get("problem") or item.get("problemIndex") or item.get("index")
             if cid and pid:
-                run_translate(int(cid), str(pid), repo_root, args.author)
+                run_translate(int(cid), str(pid), repo_root, args.author, args.force)
                 time.sleep(2)
     elif args.contest_id is not None and args.problem_index:
-        run_translate(args.contest_id, args.problem_index, repo_root, args.author)
+        run_translate(args.contest_id, args.problem_index, repo_root, args.author, args.force)
     else:
         parser.error("请提供 contest_id 和 problem_index，或使用 --config 指定配置文件")
 

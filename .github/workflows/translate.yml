@@ -37,9 +37,9 @@ jobs:
       - name: Run translate
         run: |
           if [ -n "${{ github.event.inputs.contest_id }}" ] && [ -n "${{ github.event.inputs.problem_index }}" ]; then
-            python scripts/translate.py "${{ github.event.inputs.contest_id }}" "${{ github.event.inputs.problem_index }}"
+            python scripts/translate.py "${{ github.event.inputs.contest_id }}" "${{ github.event.inputs.problem_index }}" --author Eternity-Sky
           else
-            python scripts/translate.py --config .github/translate-problems.json
+            python scripts/translate.py --config .github/translate-problems.json --author Eternity-Sky
           fi
         continue-on-error: true
 
